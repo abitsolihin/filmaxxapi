@@ -11,6 +11,18 @@ export const getFilms = async (req, res) => {
   }
 };
 
+export const getFilmByName = async (req, res) => {
+  try {
+    const response = await Film.findOne({
+      where: {
+        name: req.params.name,
+      },
+    });
+    res.json(response);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 export const getFilmByEndpoint = async (req, res) => {
   try {
     const response = await Film.findOne({
