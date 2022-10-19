@@ -1,5 +1,5 @@
 import express from "express";
-import { getFilms, getFilmById, saveFilm, updateFilm, deleteFilm, getFilmByGenre, getFilmByEndpoint } from '../controllers/FilmController.js';
+import { getFilms, getFilmById, saveFilm, updateFilm, deleteFilm, getFilmByGenre, getFilmByEndpoint, getFilmByName } from '../controllers/FilmController.js';
 
 const router = express.Router();
 
