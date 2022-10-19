@@ -11,9 +11,23 @@ export const getFilms = async (req, res) => {
   }
 };
 
-export const getFilmByGenre = async (req, res) => {
+export const getFilmByName = async (req, res) => {
   try {
     const response = await Film.findAll({
+      where: {
+        name: req.params.name,
+      },
+    });
+    res.json(response);
+    console.log(response);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export const getFilmByGenre = async (req, res) => {
+  try {
+    const response = await Film.findOne({
       where: {
         genre: req.params.genre,
       },
