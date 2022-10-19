@@ -14,6 +14,7 @@ const Film = db.define(
     background_url: DataTypes.STRING,
     stream_url: DataTypes.TEXT('long'),
     rating: DataTypes.INTEGER,
+    endpoint: DataTypes.STRING,
   },
   {
     freezeTableName: true,

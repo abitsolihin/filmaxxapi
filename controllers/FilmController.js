@@ -11,15 +11,14 @@ export const getFilms = async (req, res) => {
   }
 };
 
-export const getFilmByName = async (req, res) => {
+export const getFilmByEndpoint = async (req, res) => {
   try {
     const response = await Film.findOne({
       where: {
-        name: req.params.name,
+        endpoint: req.params.endpoint,
       },
     });
     res.json(response);
-    console.log(response);
   } catch (error) {
     console.log(error.message);
   }
@@ -33,7 +32,6 @@ export const getFilmByGenre = async (req, res) => {
       },
     });
     res.json(response);
-    console.log(response)
   } catch (error) {
     console.log(error.message);
   }
@@ -59,6 +57,7 @@ export const saveFilm = async (req, res) => {
   const stream_url = req.body.stream_url;
   const background_url = req.body.background_url;
   const rating = req.body.rating;
+  const endpoint = req.body.endpoint;
   const file = req.files.file;
   const fileSize = file.data.length;
   const ext = path.extname(file.name);
@@ -72,7 +71,7 @@ export const saveFilm = async (req, res) => {
   file.mv(`./public/Images/${fileName}`, async (err) => {
     if (err) return res.status(500).json({ msg: err.message });
     try {
-      await Film.create({ name: name, image: fileName, sinopsis: sinopsis, genre: genre,background_url: background_url, stream_url: stream_url, rating: rating, url: url });
+      await Film.create({ name: name, image: fileName, sinopsis: sinopsis, genre: genre,background_url: background_url, stream_url: stream_url, rating: rating, url: url, endpoint: endpoint });
       res.status(201).json({ msg: 'Film berhasil Di Tambahkan' });
     } catch (error) {
       console.log(error.message);
@@ -112,10 +111,11 @@ export const updateFilm = async (req, res) => {
   const stream_url = req.body.stream_url;
   const background_url = req.body.background_url;
   const rating = req.body.rating;
+  const endpoint = req.body.endpoint;
   const url = `${req.protocol}://${req.get('host')}/images/${fileName}`;
   try {
     await Film.update(
-      { name: name, image: fileName, sinopsis: sinopsis, genre: genre,background_url: background_url, stream_url: stream_url, rating: rating, url: url },
+      { name: name, image: fileName, sinopsis: sinopsis, genre: genre,background_url: background_url, stream_url: stream_url, rating: rating, url: url, endpoint, endpoint },
       {
         where: {
           id: req.params.id,
