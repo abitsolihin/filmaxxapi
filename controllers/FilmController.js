@@ -5,7 +5,7 @@ import path from 'path';
 export const getFilms = async (req, res) => {
   try {
     const response = await Film.findAll();
-    res.json(response);
+    res.json(response(req.query));
   } catch (error) {
     console.log(error.message);
   }
