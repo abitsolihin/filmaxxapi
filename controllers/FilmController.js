@@ -6,12 +6,12 @@ export const getFilms = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 12;
   const offset = (page > 1) ? (page * limit) - limit : 0;
-  const total = Data.countAll()
   try {
-    const response = await Film.findAll({limit,offset,total});
+    const response = await Film.findAll({limit,offset});
     res.json(response);
-    res.set('Access-Control-Expose-Headers', 'X-Total-Count')
-    res.set('X-Total-Count', total)
+    res.append('X-Total-Count', response.totalResults);
+    res.append('Access-Control-Expose-Headers', 'X-Total-Count');
+    res.send(result.data);
   } catch (error) {
     console.log(error.message);
   }
