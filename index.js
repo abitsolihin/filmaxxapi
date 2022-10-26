@@ -6,9 +6,7 @@ import FilmRoute from './routes/FilmRoutes.js';
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-    origin: 'https://filmaxx.vercel.app'
-}));
+app.use(cors());
 app.use(express.static('public'));
 app.use(fileUpload());
 app.use(FilmRoute);
