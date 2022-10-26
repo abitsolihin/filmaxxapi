@@ -4,11 +4,7 @@ import path from 'path';
 
 export const getFilms = async (req, res) => {
   try {
-    const response = await Film.findAll({
-      where: {
-        films: req.query
-      }
-    });
+    const response = await Film.findAll();
     res.json(response);
   } catch (error) {
     console.log(error.message);
