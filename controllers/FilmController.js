@@ -9,9 +9,6 @@ export const getFilms = async (req, res) => {
   try {
     const response = await Film.findAll({limit,offset});
     res.json(response);
-    res.append('X-Total-Count', response.totalResults);
-    res.append('Access-Control-Expose-Headers', 'X-Total-Count');
-    res.send(result.data);
   } catch (error) {
     console.log(error.message);
   }
