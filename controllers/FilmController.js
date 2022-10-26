@@ -8,7 +8,7 @@ export const getFilms = async (req, res) => {
   const offset = (page > 1) ? (page * limit) - limit : 0;
   const total = Data.countAll()
   try {
-    const response = await Film.findAll({limit,offset});
+    const response = await Film.findAll({limit,offset,total});
     res.json(response);
     res.set('Access-Control-Expose-Headers', 'X-Total-Count')
     res.set('X-Total-Count', total)
