@@ -3,8 +3,11 @@ import fs from 'fs';
 import path from 'path';
 
 export const getFilms = async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = 10;
+  const offset = (page > 1) ? (page * limit) - limit : 0;
   try {
-    const response = await Film.findAll();
+    const response = await Film.findAll({limit,offset});
     res.json(response);
   } catch (error) {
     console.log(error.message);
