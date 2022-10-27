@@ -4,13 +4,11 @@ import path from 'path';
 
 export const getFilms = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit);
+  const limit = parseInt(req.query.limit) || 12;
   const offset = (page > 1) ? (page * limit) - limit : 0;
   try {
     const response = await Film.findAndCountAll({limit,offset});
     res.json(response);
-    response.count;
-    response.rows;
   } catch (error) {
     console.log(error.message);
   }
