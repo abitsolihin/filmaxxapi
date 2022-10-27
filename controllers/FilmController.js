@@ -7,8 +7,10 @@ export const getFilms = async (req, res) => {
   const limit = parseInt(req.query.limit);
   const offset = (page > 1) ? (page * limit) - limit : 0;
   try {
-    const response = await Film.findAll({limit,offset});
+    const response = await Film.findAndCountAll({limit,offset});
     res.json(response);
+    response.count;
+    console.log(response.count)
   } catch (error) {
     console.log(error.message);
   }
