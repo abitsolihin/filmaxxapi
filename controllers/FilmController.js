@@ -9,6 +9,7 @@ export const getFilms = async (req, res) => {
   try {
     const response = await Film.findAndCountAll({limit,offset});
     res.json(response);
+    response.rows;
   } catch (error) {
     console.log(error.message);
   }
